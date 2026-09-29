@@ -1,0 +1,53 @@
+{
+    "name": "notideus/laravel-notideus",
+    "description": "Laravel integration for the Notideus email API — mailer, notifications, and SDK client",
+    "version": "1.0.0",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["notideus", "laravel", "email", "transactional email", "mailer", "notifications", "sdk"],
+    "require": {
+        "php": ">=8.2",
+        "illuminate/support": "^10.0|^11.0|^12.0",
+        "notideus/notideus-php": "dev-main as 1.0.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^8.0|^9.0|^10.0",
+        "phpstan/phpstan": "^1.12",
+        "phpunit/phpunit": "^11.0",
+        "squizlabs/php_codesniffer": "^3.10"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/notideus/sdk-php"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Notideus\\Laravel\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Notideus\\Laravel\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "lint": "phpcs",
+        "stan": "phpstan analyse"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Notideus\\Laravel\\NotideusServiceProvider"
+            ],
+            "aliases": {
+                "Notideus": "Notideus\\Laravel\\Facades\\Notideus"
+            }
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

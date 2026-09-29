@@ -1,0 +1,25 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['8.2', '8.3', '8.4']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '${{ matrix.php }}'
+          coverage: none
+      # The explicit composer.json version field (required by the release-tag guard) triggers a warning that --strict escalates to an error, so plain validate is used.
+      - run: composer validate
+      - run: composer install --prefer-dist --no-progress
+      - run: composer lint
+      - run: composer stan
+      - run: composer test
