@@ -31,11 +31,16 @@ php artisan vendor:publish --tag=notideus-config
 | `NOTIDEUS_BASE_URL`   | `base_url`     | `https://api.notideus.io` | override for self-hosting                       |
 | `NOTIDEUS_TIMEOUT`    | `timeout`      | `30.0`                    | request timeout (seconds)                       |
 | `NOTIDEUS_MAX_RETRIES`| `max_retries`  | `2`                       | retries for network errors, 5xx and 429         |
-| `NOTIDEUS_FROM_ADDRESS`| `from_address`| —                         | app-level default sender for your mailables     |
-| `NOTIDEUS_FROM_NAME`  | `from_name`    | —                         | app-level default sender name                   |
+| `NOTIDEUS_FROM_ADDRESS`| `from_address`| —                         | reserved — not consumed yet (see below)         |
+| `NOTIDEUS_FROM_NAME`  | `from_name`    | —                         | reserved — not consumed yet (see below)         |
 
 The client is registered as a singleton — `app('notideus')`, also aliased to
 `Notideus\NotideusClient` — built from this config.
+
+`NOTIDEUS_FROM_ADDRESS` and `NOTIDEUS_FROM_NAME` are reserved for a future
+release: nothing reads them today (the provider only consumes `api_key`,
+`base_url`, `timeout` and `max_retries`). For an app-level default sender,
+use Laravel's `mail.from` config or pass `from` explicitly per send.
 
 ## Usage
 
@@ -85,17 +90,20 @@ double-sends.
 
 ## Notifications
 
-Route a notification to the `notideus` channel and define `toNotideus()`:
+Route a notification through the `NotideusChannel` and define `toNotideus()`.
+Return the channel's class name from `via()` — the provider registers no named
+`notideus` notification driver:
 
 ```php
 use Illuminate\Notifications\Notification;
+use Notideus\Laravel\Notifications\NotideusChannel;
 
 final class WelcomeNotification extends Notification
 {
     /** @return array<string> */
     public function via(mixed $notifiable): array
     {
-        return ['notideus'];
+        return [NotideusChannel::class];
     }
 
     /** @return array<string, mixed> */
