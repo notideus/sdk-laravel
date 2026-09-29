@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Notideus\Laravel\Mail;
 
 use Notideus\NotideusClient;
-use Symfony\Component\Mailer\Envelope;
 use Symfony\Component\Mailer\SentMessage;
 use Symfony\Component\Mailer\Transport\AbstractTransport;
 use Symfony\Component\Mime\Address;
@@ -42,7 +41,8 @@ final class NotideusTransport extends AbstractTransport
             'html' => $email->getHtmlBody() ?? '',
             'idempotency_key' => 'mail-' . hash(
                 'sha256',
-                ($email->getHtmlBody() ?? '') . '|' . implode(',', $recipients) . '|' . ($email->getSubject() ?? ''),
+                ($email->getHtmlBody() ?? '') . '|' . implode(',', $recipients) . '|' . ($email->getSubject() ?? '')
+                    . '|' . bin2hex(random_bytes(8)),
             ),
         ];
 
