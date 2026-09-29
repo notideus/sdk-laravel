@@ -34,5 +34,9 @@ final class NotideusServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../config/notideus.php' => config_path('notideus.php'),
         ], 'notideus-config');
+
+        \Illuminate\Support\Facades\Mail::extend('notideus', function (): Mail\NotideusTransport {
+            return new Mail\NotideusTransport($this->app->make('notideus'));
+        });
     }
 }
