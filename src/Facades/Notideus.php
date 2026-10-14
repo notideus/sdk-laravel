@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Facade;
  * @method static \Notideus\Resources\WhatsAppResource whatsapp()
  * @method static \Notideus\Resources\UnsubscribeResource unsubscribe()
  * @method static \Notideus\Resources\PlansResource plans()
+ * @method static \Notideus\Resources\WebhooksResource webhooks()
+ * @method static \Notideus\Resources\InboundResource inbound()
  *
  * @see \Notideus\NotideusClient
  */
