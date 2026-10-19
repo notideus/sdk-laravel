@@ -137,6 +137,7 @@ try {
     if ($e->getErrorCode() === 'from_domain_not_verified') { … }
     if ($e->getErrorCode() === 'rate_limited') {
         $e->getRetryAfter(); // seconds to wait
+        $e->getReason(); // optional admin note on account_suspended
     }
     $e->getStatus(); // HTTP status
 }
