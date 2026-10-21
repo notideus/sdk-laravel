@@ -89,6 +89,10 @@ through the API. The transport maps the message's from, to, subject and HTML
 derives an `idempotency_key` from the content so a retried send never
 double-sends.
 
+**Tracking:** the Laravel mailer rides `POST /v1/emails`; pass per-message
+tracking by configuring the underlying `notideus/notideus-php` client when
+sending via the SDK directly (`$notideus->emails()->send([... 'track_opens' => true ...])`).
+
 ## Notifications
 
 Route a notification through the `NotideusChannel` and define `toNotideus()`.
