@@ -60,11 +60,24 @@ $email = Notideus::emails()->send([
 ]);
 ```
 
-`contacts()`, `whatsapp()`, `unsubscribe()`, `plans()`, `webhooks()` and
+`events()`, `contacts()`, `whatsapp()`, `unsubscribe()`, `plans()`, `webhooks()` and
 `inbound()` work the same way.
 Params and responses use snake_case exactly like the API — see the
 [API reference](https://notideus.io/docs) and the `notideus/notideus-php`
 README for the full resource surface.
+
+To start automations from your application, send a custom event with exactly one recipient (`email` or `contact_id`):
+
+```php
+$result = Notideus::events()->send([
+    'event' => 'user.created',
+    'email' => 'ada@example.com',
+    'payload' => ['first_name' => 'Ada', 'plan' => 'Pro'],
+    'idempotency_key' => 'signup-42',
+]);
+```
+
+The API accepts the event for asynchronous dispatch; it does not mean the email was delivered. Replaying an `idempotency_key` returns the same event with `created: false` and never creates a duplicate run.
 
 ## Mail
 

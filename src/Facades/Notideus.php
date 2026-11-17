@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static \Notideus\Resources\EmailsResource emails()
+ * @method static \Notideus\Resources\EventsResource events()
  * @method static \Notideus\Resources\ContactsResource contacts()
  * @method static \Notideus\Resources\WhatsAppResource whatsapp()
  * @method static \Notideus\Resources\UnsubscribeResource unsubscribe()
