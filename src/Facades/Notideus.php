@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Facade;
  * @method static \Notideus\Resources\EmailsResource emails()
  * @method static \Notideus\Resources\EventsResource events()
  * @method static \Notideus\Resources\ContactsResource contacts()
- * @method static \Notideus\Resources\WhatsAppResource whatsapp()
  * @method static \Notideus\Resources\UnsubscribeResource unsubscribe()
  * @method static \Notideus\Resources\PlansResource plans()
  * @method static \Notideus\Resources\WebhooksResource webhooks()

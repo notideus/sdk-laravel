@@ -60,7 +60,7 @@ $email = Notideus::emails()->send([
 ]);
 ```
 
-`events()`, `contacts()`, `whatsapp()`, `unsubscribe()`, `plans()`, `webhooks()` and
+`events()`, `contacts()`, `unsubscribe()`, `plans()`, `webhooks()` and
 `inbound()` work the same way.
 Params and responses use snake_case exactly like the API — see the
 [API reference](https://notideus.io/docs) and the `notideus/notideus-php`
